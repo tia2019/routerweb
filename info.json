@@ -1,0 +1,20 @@
+{
+    "family":{
+        "parents":{
+            "parent1":"Katie",
+            "parent2":"Christine"
+        },
+        "sibling": "Natalya",
+        "Grandparents":{
+            "parent1":{
+                "Gram":"Barb",
+                "Gran":"Bruce"
+            },
+            "parent2":{
+                "Gram":"Bonnie",
+                "Gran":"Joe"
+            }
+        }
+
+    }
+}
