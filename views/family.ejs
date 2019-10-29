@@ -2,20 +2,32 @@
     <head> 
         Family
     </head>
-    <% include navbar %> 
-    <div class="dropdown">
-            <button class="dropbtn">Dropdown
-              <i class="fa fa-caret-down"></i>
-            </button>
-            <div class="dropdown-content">
-              <a href="#">Link 1</a>
-              <a href="#">Link 2</a>
-              <a href="#">Link 3</a>
-            </div>
-          
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <script>
+    $(document).ready(function(){
+        $("#submitBtn").click(function(){        
+            $("#myForm").submit(); // Submit the form
+        });
+    });
+    </script>
+    <div class="navbar">
+            <% include navbar %> 
+            
+    
     </div>
+    
 
     <body>
-   
+            <form action="/family" type="text" method="post" id="myForm">
+                <select name="dropnames">
+                        <option value="">-- Select Family--</option>
+                        <% for (var i = 0; i < famMems.length; i++) { %>
+                           <% var output = famMems[i].Name; %>
+                           <option value="<%= output %>"><%= output %></option>
+                        <%}%>      
+                </select>
+                <button type="button" id="submitBtn">Submit Form</button>
+            </form>
+           
     </body>
 </html>

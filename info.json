@@ -1,20 +1,23 @@
-{
-    "family":{
-        "parents":{
-            "parent1":"Katie",
-            "parent2":"Christine"
+[
+    {
+        "Name":"Tia",
+        "Age": 22
+    
         },
-        "sibling": "Natalya",
-        "Grandparents":{
-            "parent1":{
-                "Gram":"Barb",
-                "Gran":"Bruce"
-            },
-            "parent2":{
-                "Gram":"Bonnie",
-                "Gran":"Joe"
-            }
+    {
+        "Name":"Natalya",
+        "Age": 20
+    
+        },
+    {
+            "Name":"Katie",
+            "Age":55
+        
+        },
+    {
+            "Name":"Christine",
+            "Age":54
+        
         }
 
-    }
-}
+]
