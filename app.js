@@ -43,6 +43,10 @@ app.get('/family', function(req, res) {
     res.render('family', {famMems:famMems}); 
     
 });
+app.get('/katie', function(req, res) {
+    res.render('katie'); 
+    
+})
 app.post('/contact', urlencodedParser,function(req, res){
     console.log(req.body.firstname);
     console.log(req.body.email);
@@ -53,8 +57,14 @@ app.post('/contact', urlencodedParser,function(req, res){
  app.post('/family', urlencodedParser,function(req, res){
     var responseName= req.body.dropnames;
    console.log(responseName);
-    res.send("recieved your request!");
+    res.redirect('/family/'+responseName);
  });
+
+ app.get('/familydetail:responseName', function(req, res) {
+    var responseName=req.params.responseName;
+    res.render('family', {name:responseName}); 
+    
+});
 app.listen(port);
 
 
