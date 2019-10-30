@@ -4,11 +4,11 @@
         <title>Contact Form Submit</title>
         <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
         <script>
-        $(document).ready(function(){
-            $("#submitBtn").click(function(){        
-                $("#myForm").submit(); // Submit the form
-            });
-        });
+        // $(document).ready(function(){
+        //     $("#submitBtn").click(function(){        
+        //         $("#myForm").submit(); // Submit the form
+        //     });
+        // });
         </script>
        
     </head>
@@ -16,16 +16,16 @@
     <% include navbar %>
 
     <body>
-            <form action="/contact" type="text" method="post" id="myForm">
+            <form action="/contact" type="text" method="post" required>
                 <label>First Name:</label>
-                <input type="text" name="firstname">
+                <input type="text" name="firstname" required>
                 <br/>
                 <label>Email:</label>
-                <input type="text" name="email">
-                <button type="button" id="submitBtn">Submit Form</button>
+                <input type="email" name="email" required>
+                <button type="submit" id="submitBtn">Submit Form</button>
+                <textarea rows="4" cols="50"  name="comment" required></textarea>
             </form>
-            <textarea rows="4" cols="50" name="comment" form="myform">
-                    Enter Comment here....</textarea>
+
                     
     </body>
 </html>

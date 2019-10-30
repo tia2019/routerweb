@@ -1,22 +1,26 @@
 [
     {
         "Name":"Tia",
-        "Age": 22
+        "Age": 22,
+        "Location":"Raleigh"
     
         },
     {
         "Name":"Natalya",
-        "Age": 20
+        "Age": 20,
+        "Location":"Wilmington"
     
         },
     {
             "Name":"Katie",
-            "Age":55
+            "Age":55,
+            "Location":"Cary"
         
         },
     {
             "Name":"Christine",
-            "Age":54
+            "Age":54,
+            "Location":"Cary"
         
         }
 
