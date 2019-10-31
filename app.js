@@ -124,9 +124,12 @@ app.post('/contact', urlencodedParser,function(req, res, next){
 
  app.get('/familydetail/:responseName', function(req, res) {
     var responseName=req.params.responseName;
-    var person= webinfo.filter(item=>item.webinfo.family.Name===responseName);
-    console.log(person);
-    res.render('familydetail', {person:person[0]}); 
+   // var person= famMems.filter(item=>item.Name===responseName);
+    console.log(responseName,);
+    var person2= webinfo[0].webinfo.family[responseName];
+    console.log(person2);
+   // console.log(person2[0].Name);
+    res.render('familydetail', {person2:person2, responseName:responseName}); 
     
 });
 app.listen(port);

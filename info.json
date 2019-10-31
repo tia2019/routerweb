@@ -1,25 +1,21 @@
 [{
     "webinfo":{
         "family":{
-            "me":{
-                "Name":"Tia",
+            "Tia":{
                 "Age": 22,
                 "Location":"Raleigh"
             },
-            "sister" :{
-                "Name":"Natalya",
+            "Natalya" :{
                 "Age": 20,
                 "Location":"Wilmington"
             
             },
-            "Parent1":{
-                "Name":"Katie",
+            "Katie":{
                 "Age":55,
                 "Location":"Cary"
             
             },
-            "Parent2":{
-                "Name":"Christine",
+            "Christine":{
                 "Age":54,
                 "Location":"Cary"
             }

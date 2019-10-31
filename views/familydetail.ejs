@@ -4,7 +4,25 @@
     <% include navbar %>
     </head>
     <body>
-       
-            <%= person.Name %> 
+            <table class="pure-table pure-table-horizontal">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Age</th>
+                            <th>Location</th>
+                        </tr>
+                    </thead>
+                    
+                    <tbody>
+
+                            <tr>
+
+                                        <td><%= responseName %></td>
+                                        <td><%= person2.Age %></td>
+                                        <td><%= person2.Location %></td>
+         
+                            </tr>
+                    </tbody>
+            </table>
     </body>
 </html>
