@@ -78,12 +78,13 @@ app.get('/guestbook', function(req, res){
     con.end()
 });
 app.get('/api/:pageName', function(req, res){
-    console.log(req.params.pageName);
+   // console.log(req.params.pageName);
     var pageName = req.params.pageName;
-    console.log(webinfo[0].webinfo.pageName);
-
-    console.log(webinfo[0].webinfo[pageName]);
-    res.render('api', {webinfo:webinfo, pageName:pageName}); 
+    var passme=webinfo[0].webinfo[pageName];
+    res.json(passme);
+    //var passme1 = [passme];
+    //console.log(passme1);
+    //res.render('api', {webinfo:passme1}); 
 
 });
 app.post('/contact', urlencodedParser,function(req, res, next){

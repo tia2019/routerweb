@@ -1,7 +1,5 @@
 <html>
-    <head> 
-            <% include navbar %>
-    </head>
+    <% include header %>
     <body>
             <% info.forEach(function(item) { %>
                 <% var output = item.webinfo.aboutme; %>
@@ -20,5 +18,8 @@
                  <% }; %>          
                  
              <% }); %>    
+
+             <div>
+                <a href="/api/aboutme">get about me page api</a></div>
     </body>
 </html>
