@@ -3,12 +3,10 @@
 
     <body>
             <% webinfo.forEach(function(item) { %>
-                <% var output = item.webinfo %>
-                <% var showVals =Object.values(output); %> 
-                <% var showKeys =Object.keys(output); %>
+                <% var output = item.webinfo.pageName %>
                <%= output %>  
              <% }); %>    
            
-        <%= webinfo %>
+       
     </body>
 </html>
