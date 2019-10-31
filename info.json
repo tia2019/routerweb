@@ -26,14 +26,7 @@
         },
         "aboutme":{
             "School":"UNC CHAPEL HILL",
-            "Languages":{
-                "1":"Spanish", 
-                "2":"English", 
-                "3":"Python", 
-                "4":"Java", 
-                "5":"JS", 
-                "6":"HTML/CSS"
-            },
+            "Languages":["Spanish", "English", "Python",  "Java",  "JS",  "HTML/CSS"],
             "Age": 22,
             "Favorite  Coding Lnguage": "Java"
 

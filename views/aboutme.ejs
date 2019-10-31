@@ -3,9 +3,23 @@
             <% include navbar %>
     </head>
     <body>
-            <% for (var i = 0; i < info.length; i++) { %>
-                <% var output = info[i]; %>
-                <div><%= output %></div>
-             <%}%>    
+            <% info.forEach(function(item) { %>
+                <% var output = item.webinfo.aboutme; %>
+                <% var showVals =Object.values(output); %>
+
+                <% var showKeys =Object.keys(output); %>
+                <% for (var i = 0; i < showKeys.length; i++) { %>
+                    <% if(i===1 ){ %>
+                        <div><%= showKeys[i] %> : </div>
+                        <% for (var j = 1; j < showVals[1].length+1; j++) { %>
+                            <div> <%= showVals[1].j %></div>
+                            <% } %> 
+                            
+                    <% } else { %>
+                        <div> <%=  showVals[i] %></div>
+                    <% } %>
+                 <%}; %>          
+                 
+             <% }); %>    
     </body>
 </html>

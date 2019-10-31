@@ -5,7 +5,7 @@ var fs = require('fs');
 var bodyParser=require('body-parser');
 var jsonParser=bodyParser.json();
 var urlencodedParser= bodyParser.urlencoded({ extended: false});
-var webinfo=require('./info.json');
+var webinfo=JSON.parse(fs.readFileSync('/Users/tiaholmes/Documents/nodetraining/routingpractice/info.json', 'utf8'));
 var mysql=require('mysql');
 // fs.readFile('./info.json', 'utf8', (err, jsonString) => 
 //     if (err) {
@@ -30,9 +30,8 @@ app.get('/', function(req, res) {
    
 });
 app.get('/aboutme', function(req, res) {
-    var sendJson=webinfo.webinfo.aboutme;
     console.log(webinfo);
-    res.render('aboutme', {info:sendJson});
+    res.render('aboutme', {info:webinfo});
     
 });
 // app.get('/food', function(req, res) {
