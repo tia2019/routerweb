@@ -5,7 +5,8 @@ var fs = require('fs');
 var bodyParser=require('body-parser');
 var jsonParser=bodyParser.json();
 var urlencodedParser= bodyParser.urlencoded({ extended: false});
-var webinfo=JSON.parse(fs.readFileSync('/Users/tiaholmes/Documents/nodetraining/routingpractice/info.json', 'utf8'));
+var webinfo=require('./info.json');
+//var webinfo=JSON.parse(fs.readFileSync('/Users/tiaholmes/Documents/nodetraining/routingpractice/info.json', 'utf8'));
 var mysql=require('mysql');
 // fs.readFile('./info.json', 'utf8', (err, jsonString) => 
 //     if (err) {
