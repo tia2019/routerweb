@@ -44,7 +44,7 @@ app.get('/contact', function(req, res) {
    
 });
 app.get('/family', function(req, res) {
-    res.render('family', {famMems:famMems}); 
+    res.render('family', {info:webinfo}); 
     
 });
 app.get('/guestbook', function(req, res){
@@ -124,8 +124,8 @@ app.post('/contact', urlencodedParser,function(req, res, next){
 
  app.get('/familydetail/:responseName', function(req, res) {
     var responseName=req.params.responseName;
-    var person= famMems.filter(item=>item.Name===responseName);
-    console.log(person[0].Name);
+    var person= webinfo.filter(item=>item.webinfo.family.Name===responseName);
+    console.log(person);
     res.render('familydetail', {person:person[0]}); 
     
 });

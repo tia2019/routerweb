@@ -15,16 +15,25 @@
     
 
     <body>
-            <form class="pure-form pure-form-stacked" action="/family" type="text" method="post" id="myForm">
-                <select style="margin: 4%; position: fixed;" name="dropnames">
-                        <option value="">-- Select Family--</option>
-                        <% for (var i = 0; i < famMems.length; i++) { %>
-                           <% var output = famMems[i].Name; %>
-                           <option value="<%= output %>"><%= output %></option>
+            <% info.forEach(function(item) { %>
+                <% var output = item.webinfo.family; %>
+                <% var showVals =Object.values(output); %> 
+                <% var showKeys =Object.keys(output); %>
+                    <form class="pure-form pure-form-stacked" action="/family" type="text" method="post" id="myForm">
+                        <select style="margin: 4%; position: fixed;" name="dropnames">
+                                <option value="">-- Select Family--</option>
+                                
+                        <% for (var i = 0; i < showKeys.length; i++) { %>
+                                   <% var output2 = showKeys[i] %>
+                                   <option value="<%= output2%>"><%= output2 %></option>
                         <%}%>      
-                </select>
-                <button style="margin: 4%; position: fixed; top: 17%;"class="pure-button pure-button-primary" type="button" id="submitBtn">Submit Form</button>
-            </form>
+                        </select>
+                        <button style="margin: 4%; position: fixed; top: 17%;"class="pure-button pure-button-primary" type="button" id="submitBtn">Submit Form</button>
+                    </form> 
+                         
+                 
+             <% }); %>    
+             
            
     </body>
 </html>
