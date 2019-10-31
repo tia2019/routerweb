@@ -77,7 +77,10 @@ app.get('/guestbook', function(req, res){
 
     con.end()
 });
+app.get('/api', function(req, res){
+   res.render('api', {webinfo:webinfo}); 
 
+});
 app.post('/contact', urlencodedParser,function(req, res, next){
     var firstname=req.body.firstname;
     var email=req.body.email;
