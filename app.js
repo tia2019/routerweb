@@ -5,7 +5,7 @@ var fs = require('fs');
 var bodyParser=require('body-parser');
 var jsonParser=bodyParser.json();
 var urlencodedParser= bodyParser.urlencoded({ extended: false});
-var famMems=require('./info.json');
+var webinfo=require('./info.json');
 var mysql=require('mysql');
 // fs.readFile('./info.json', 'utf8', (err, jsonString) => 
 //     if (err) {
@@ -24,18 +24,21 @@ app.set('view engine', 'ejs');
 var port = process.env.PORT || 3000;
 app.use(express.static(__dirname +'/public'));
 app.get('/', function(req, res) {
-    console.log(famMems);
+   // console.log(famMems);
     res.render('index');
+   // console.log("got Index")
    
 });
 app.get('/aboutme', function(req, res) {
-    res.render('aboutme');
+    var sendJson=webinfo.webinfo.aboutme;
+    console.log(webinfo);
+    res.render('aboutme', {info:sendJson});
     
 });
-app.get('/food', function(req, res) {
-    res.render('food');
+// app.get('/food', function(req, res) {
+//     res.render('food');
 
-});
+// });
 app.get('/contact', function(req, res) {
     res.render('contact');
 
@@ -44,6 +47,35 @@ app.get('/contact', function(req, res) {
 app.get('/family', function(req, res) {
     res.render('family', {famMems:famMems}); 
     
+});
+app.get('/guestbook', function(req, res){
+    console.log(req.body);
+   
+
+    var con = mysql.createConnection({
+        host:"localhost",
+        user:"root",
+        password:"password",
+        database:"sys"
+    });
+    con.connect();
+    var qury = `SELECT * FROM contactform `;
+    console.log(qury);
+    con.query(qury, 
+        function(err, result){
+            if(err) {
+                res.status(500)
+                res.render('error','FAILED TO FETCH FROM TO DATABASE, MYSQL ERROR')
+
+            }
+            console.log(result);
+            res.render('guestbook',{myresult:result});
+            //console.log(rows[0]);
+        }
+    
+    );
+
+    con.end()
 });
 
 app.post('/contact', urlencodedParser,function(req, res, next){

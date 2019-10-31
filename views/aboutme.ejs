@@ -1,9 +1,11 @@
 <html>
     <head> 
-        About Me:
+            <% include navbar %>
     </head>
-    <% include navbar %>
     <body>
-        
+            <% for (var i = 0; i < info.length; i++) { %>
+                <% var output = info[i]; %>
+                <div><%= output %></div>
+             <%}%>    
     </body>
 </html>
