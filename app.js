@@ -67,13 +67,13 @@ app.get('/guestbook', function(req, res){
    
 
     var con = mysql.createConnection({
-        host:"localhost",
+        host:"34.67.108.108",
         user:"root",
         password:"password",
-        database:"sys"
+        database:"formdata"
     });
     con.connect();
-    var qury = `SELECT * FROM contactform `;
+    var qury = `SELECT * FROM form `;
     console.log(qury);
     con.query(qury, 
         function(err, result){
@@ -126,13 +126,13 @@ app.post('/contact', urlencodedParser, function(req, res){
 
 
             var con = mysql.createConnection({
-                host:"localhost",
+                host:"34.67.108.108",
                 user:"root",
                 password:"password",
-                database:"sys"
+                database:"formdata"
             });
             con.connect();
-            var qury = `INSERT INTO sys.contactform (comment, email, submission_date, firstname, fname ) VALUES ( "${comment}", "${email}", CURDATE(), "${firstname}", "${fname}" )`;
+            var qury = `INSERT INTO formdata.form (comment, email, submission_date, firstname, fname ) VALUES ( "${comment}", "${email}", CURDATE(), "${firstname}", "${fname}" )`;
             console.log(qury);
             con.query(qury, 
                 function(err){
