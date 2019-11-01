@@ -65,7 +65,7 @@ app.get('/family', function(req, res) {
 
 
 app.get('/guestbook', function(req, res){
-    console.log(req.body);
+    //console.log(req.body);
    
 
     var con = mysql.createConnection({
@@ -76,7 +76,7 @@ app.get('/guestbook', function(req, res){
     });
     con.connect();
     var qury = `SELECT * FROM form `;
-    console.log(qury);
+//    console.log(qury);
     con.query(qury, 
         function(err, result){
             if(err) {
@@ -84,7 +84,7 @@ app.get('/guestbook', function(req, res){
                 res.render('error','FAILED TO FETCH FROM TO DATABASE, MYSQL ERROR')
 
             }
-            console.log(result);
+           // console.log(result);
             res.render('guestbook',{myresult:result});
             //console.log(rows[0]);
         }
@@ -149,7 +149,9 @@ app.post('/contact', urlencodedParser, function(req, res){
 
  });
 
- app.delete('/guestbook/(:name)', function(req, res) {
+ app.post('/guestbook/:name', urlencodedParser, function(req, res) {
+    var firstname=Object.keys(req.body)[0];
+
     var con = mysql.createConnection({
         host:"34.67.108.108",
         user:"root",
@@ -157,8 +159,8 @@ app.post('/contact', urlencodedParser, function(req, res){
         database:"formdata"
     });
     con.connect();
-    var qury = `DELETE FROM form WHERE firstname= "${req.body.firstname}"`;
-    console.log(qury);
+    var qury = `DELETE FROM form WHERE firstname= "${firstname}"`;
+    //console.log(qury);
     con.query(qury, 
         function(err, result){
             if(err) {

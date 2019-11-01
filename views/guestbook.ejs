@@ -1,5 +1,5 @@
 <html>
-        <% include header %>
+    <% include header %>
     <body>
 
 
@@ -25,10 +25,11 @@
                                     <td><%= myresult[i].submission_date %></td>
                                     <td> <img src="/uploads/<%= myresult[i].fname%>" ></td>
                                     <td>
-                                        <form method="post" action="/guestbok/delete/<%= myresult[i].firstname %>" style="float:right">
-                                            <input type="submit" name="delete" value='Delete' onClick="return confirm('Are you sure you want to delete?')" />
-                                            <input type="hidden" name="_method" value="DELETE" />
+                                        <form method="POST" action="/guestbook/<%= myresult[i].firstname %>" style="float:right">
+                                            <input type="submit" name="<%= myresult[i].firstname %>" value="Delete" onClick="return confirm('Are you sure you want to delete?')" />
+                                            <input type="hidden" name="<%= myresult[i].firstname %>" value="DELETE" />
                                         </form>
+                                        <!-- <input id="delete" type="button" value="delete"> -->
                                     </td>
         
                             </tr>
@@ -37,5 +38,5 @@
     </body>
      
     
-    <% include footer %>
+<% include footer %>
 </html>

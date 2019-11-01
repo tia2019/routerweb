@@ -1,6 +1,6 @@
 <html>
 
-        <% include header %>
+     <% include header %>
     <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
     <script>
     $(document).ready(function(){
@@ -12,7 +12,7 @@
 
 
     
-
+<div>
     <body>
             <% info.forEach(function(item) { %>
                 <% var output = item.webinfo.family; %>
@@ -31,11 +31,12 @@
                     </form> 
                          
                  
-             <% }); %>    
-             
-           
+             <% }); %>      
     </body>
+    </div>
+    <div>
+        <% include footer %>   
+     </div>
 
 
-    <% include footer %>
 </html>
