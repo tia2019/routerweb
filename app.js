@@ -6,6 +6,7 @@ var bodyParser=require('body-parser');
 var jsonParser=bodyParser.json();
 var urlencodedParser= bodyParser.urlencoded({ extended: false});
 var webinfo=require('./info.json');
+var multer = require('multer');
 //var webinfo=JSON.parse(fs.readFileSync('/Users/tiaholmes/Documents/nodetraining/routingpractice/info.json', 'utf8'));
 var mysql=require('mysql');
 // fs.readFile('./info.json', 'utf8', (err, jsonString) => 
@@ -24,6 +25,21 @@ var mysql=require('mysql');
 app.set('view engine', 'ejs');
 var port = process.env.PORT || 3000;
 app.use(express.static(__dirname +'/public'));
+
+var Storage = multer.diskStorage({
+    destination: function(req, file, callback) {
+        callback(null, "/uploads");
+    },
+    filename: function(req, file, callback) {
+        callback(null, file.fieldname + "_" + Date.now() + "_" + file.originalname);
+    }
+});
+
+
+var upload = multer({
+    storage: Storage
+}).array("imgUploader", 3); 
+
 app.get('/', function(req, res) {
    // console.log(famMems);
     res.render('index');
@@ -87,7 +103,8 @@ app.get('/api/:pageName', function(req, res){
     //res.render('api', {webinfo:passme1}); 
 
 });
-app.post('/contact', urlencodedParser,function(req, res, next){
+
+app.post('/contact', urlencodedParser,function(req, res){
     var firstname=req.body.firstname;
     var email=req.body.email;
     var comment =req.body.comment;
@@ -124,7 +141,12 @@ app.post('/contact', urlencodedParser,function(req, res, next){
     );
 
     con.end();
-    next();
+    upload(req, res, function(err) {
+        if (err) {
+            return res.end("Something went wrong!");
+        }
+        return res.end("File uploaded sucessfully!.");
+    });
  });
  app.post('/family', urlencodedParser,function(req, res){
     var responseName= req.body.dropnames;
