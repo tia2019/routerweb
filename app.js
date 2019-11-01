@@ -24,14 +24,14 @@ var mysql=require('mysql');
 
 app.set('view engine', 'ejs');
 var port = process.env.PORT || 3000;
-// app.use(express.static(__dirname +'/public'));
+app.use(express.static(__dirname +'/public'));
 
 var Storage = multer.diskStorage({
     destination: function(req, file, callback) {
         callback(null, "./public/uploads");
     },
     filename: function(req, file, callback) {
-        callback(null,  Date.now() + "_" + file.originalname);
+        callback(null, file.originalname);
     }
 });
 
@@ -112,7 +112,9 @@ app.post('/contact', urlencodedParser, function(req, res){
             var firstname=req.body.firstname;
             var email=req.body.email;
             var comment =req.body.comment;
-            console.log(req.body)
+            var fname=req.files[0].originalname;
+           // console.log(req.files[0].originalname);
+           // console.log(req.body)
             if(firstname==='' || email===''|| comment==='') {
                 res.status(400)
                 res.render('error','FAILED TO ADD TO DATABASE, missing valueERROR')
@@ -130,7 +132,7 @@ app.post('/contact', urlencodedParser, function(req, res){
                 database:"sys"
             });
             con.connect();
-            var qury = `INSERT INTO sys.contactform (comment, email, submission_date, firstname ) VALUES ( "${comment}", "${email}", CURDATE(), "${firstname}" )`;
+            var qury = `INSERT INTO sys.contactform (comment, email, submission_date, firstname, fname ) VALUES ( "${comment}", "${email}", CURDATE(), "${firstname}", "${fname}" )`;
             console.log(qury);
             con.query(qury, 
                 function(err){

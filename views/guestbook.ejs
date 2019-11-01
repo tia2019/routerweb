@@ -10,6 +10,7 @@
                             <th>Email</th>
                             <th>Message</th>
                             <th>Visited On</th>
+                            <th>Picture Uploaded</th>
                         </tr>
                     </thead>
                     
@@ -22,6 +23,7 @@
 
                                     <td><%= myresult[i].comment %></td>
                                     <td><%= myresult[i].submission_date %></td>
+                                    <td> <img src="/uploads/<%= myresult[i].fname%>" ></td>
         
                             </tr>
                         <% } %>
