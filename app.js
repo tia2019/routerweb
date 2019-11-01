@@ -62,6 +62,8 @@ app.get('/family', function(req, res) {
     res.render('family', {info:webinfo}); 
     
 });
+
+
 app.get('/guestbook', function(req, res){
     console.log(req.body);
    
@@ -112,18 +114,7 @@ app.post('/contact', urlencodedParser, function(req, res){
             var firstname=req.body.firstname;
             var email=req.body.email;
             var comment =req.body.comment;
-            var fname=req.files[0].originalname;
-           // console.log(req.files[0].originalname);
-           // console.log(req.body)
-            if(firstname==='' || email===''|| comment==='') {
-                res.status(400)
-                res.render('error','FAILED TO ADD TO DATABASE, missing valueERROR')
-
-            } else {
-
-                res.send("recieved your request!");
-            }
-
+            var fname=req.files[0].originalname
 
             var con = mysql.createConnection({
                 host:"34.67.108.108",
@@ -138,8 +129,11 @@ app.post('/contact', urlencodedParser, function(req, res){
                 function(err){
                     if(err) {
                         res.status(500)
-                        res.render('error','FAILED TO ADD TO DATABASE, MYSQL ERROR')
-
+                        console.log('error','FAILED TO ADD TO DATABASE, MYSQL ERROR')
+                        res.redirect('/guestbook');
+                    } else {
+                        console.log('success','ADDED RECORD TO DATABASE')
+                        res.redirect('/guestbook');
                     }
                     //console.log(rows[0]);
                 }
@@ -147,11 +141,44 @@ app.post('/contact', urlencodedParser, function(req, res){
             );
 
         con.end();
-            return res.end("File uploaded sucessfully!.");
+            //return res.end("File uploaded sucessfully!.");
         }
     });
 
     
+
+ });
+
+ app.delete('/guestbook/(:name)', function(req, res) {
+    var con = mysql.createConnection({
+        host:"34.67.108.108",
+        user:"root",
+        password:"password",
+        database:"formdata"
+    });
+    con.connect();
+    var qury = `DELETE FROM form WHERE firstname= "${req.body.firstname}"`;
+    console.log(qury);
+    con.query(qury, 
+        function(err, result){
+            if(err) {
+                res.status(500)
+                console.log('error','FAILED TO DELETE DATABASE, MYSQL ERROR')
+                res.redirect('/guestbook');
+
+            } else {
+                console.log('success', 'User deleted successfully! name= ' + req.params.firstname)
+                res.redirect('/guestbook');
+            
+            }
+           // console.log(result);
+            
+            //console.log(rows[0]);
+        }
+    
+    );
+
+    con.end()
 
  });
  app.post('/family', urlencodedParser,function(req, res){
