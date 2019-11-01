@@ -1,38 +1,58 @@
 <html>
  
         <% include header %>
-
-    <script src="Scripts/jquery-3.1.1.min.js"></script>
-    <script src="Scripts/jquery.form.min.js"></script>
-
-
-<script>
-        $(document).ready(function() {
-                    var options = {
-                            beforeSubmit: showRequest, // pre-submit callback 
-                            success: showResponse // post-submit callback 
-                        }; // bind to the form's submit event 
-                        $('#frmUploader').submit(function () { 
-                            $(this).ajaxSubmit(options); // always return false to prevent standard browser submit and page navigation 
-                            return false; 
-                        }); 
-        }); // pre-submit callback 
-        function showRequest(formData, jqForm, options) { alert('Uploading is starting.'); return true; } // post-submit callback 
-        function showResponse(responseText, statusText, xhr, $form) { alert('status: ' + statusText + '\n\nresponseText: \n' + responseText ); }
-</script>
+        <script src="Scripts/jquery-3.1.1.min.js"></script> 
+        <script src="Scripts/jquery.form.min.js"></script> 
+        <script> 
+            $(document).ready(function () { 
+                var options = { 
+                    beforeSubmit: showRequest,  // pre-submit callback 
+                    success: showResponse  // post-submit callback 
+                }; 
+     
+                // bind to the form's submit event 
+                $('#frmUploader').submit(function () { 
+                    $(this).ajaxSubmit(options); 
+                    // always return false to prevent standard browser submit and page navigation 
+                    return false; 
+                }); 
+            }); 
+     
+            // pre-submit callback 
+            function showRequest(formData, jqForm, options) { 
+                alert('Uploading is starting.'); 
+                return true; 
+            } 
+     
+            // post-submit callback 
+            function showResponse(responseText, statusText, xhr, $form) { 
+                alert('status: ' + statusText + '\n\nresponseText: \n' + responseText ); 
+            } 
+        </script> 
 
     <body>
-            <form id="frmUploader" action="/contact" enctype="multipart/form-data" method="post" required>
+            <!-- <form id="frmUploader" action="/contact" enctype="multipart/form-data" method="post">
+                 <label>First Name:</label>
+                <input type="text" name="firstname" required>
+                <br/>
+                <label>Email:</label>
+                <input type="email" name="email" required> -->
+                <!-- <input type="file" name="imgUploader" multiple />
+                <input type="submit" name="submit" id="btnSubmit" value="Upload" />  -->
+                <!-- <button type="submit" id="submitBtn">Submit Form</button> -->
+                <!-- <textarea rows="4" cols="50"  name="comment" required></textarea> -->
+            <!-- </form> -->
+            <form id="frmUploader" enctype="multipart/form-data" action="/contact" method="post"> 
                 <label>First Name:</label>
                 <input type="text" name="firstname" required>
                 <br/>
                 <label>Email:</label>
-                <input type="email" name="email" required>
-                <input type="file" name="imgUploader" multiple />
+                <input type="email" name="email" required> 
+               
+              <textarea rows="4" cols="50"  name="comment" required></textarea>
+                <input type="file" name="imgUploader" multiple /> 
                 <input type="submit" name="submit" id="btnSubmit" value="Upload" /> 
-                <!-- <button type="submit" id="submitBtn">Submit Form</button> -->
-                <textarea rows="4" cols="50"  name="comment" required></textarea>
-            </form>
+            </form> 
 
 
                     

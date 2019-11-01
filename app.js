@@ -24,21 +24,19 @@ var mysql=require('mysql');
 
 app.set('view engine', 'ejs');
 var port = process.env.PORT || 3000;
-app.use(express.static(__dirname +'/public'));
+// app.use(express.static(__dirname +'/public'));
 
 var Storage = multer.diskStorage({
     destination: function(req, file, callback) {
-        callback(null, "/uploads");
+        callback(null, "./public/uploads");
     },
     filename: function(req, file, callback) {
-        callback(null, file.fieldname + "_" + Date.now() + "_" + file.originalname);
+        callback(null,  Date.now() + "_" + file.originalname);
     }
 });
 
 
-var upload = multer({
-    storage: Storage
-}).array("imgUploader", 3); 
+var upload = multer({ storage: Storage }).array("imgUploader", 1); 
 
 app.get('/', function(req, res) {
    // console.log(famMems);
@@ -104,49 +102,55 @@ app.get('/api/:pageName', function(req, res){
 
 });
 
-app.post('/contact', urlencodedParser,function(req, res){
-    var firstname=req.body.firstname;
-    var email=req.body.email;
-    var comment =req.body.comment;
-    console.log(req.body)
-    if(firstname==='' || email===''|| comment==='') {
-        res.status(400)
-        res.render('error','FAILED TO ADD TO DATABASE, missing valueERROR')
-
-    } else {
-
-        res.send("recieved your request!");
-    }
-
-
-    var con = mysql.createConnection({
-        host:"localhost",
-        user:"root",
-        password:"password",
-        database:"sys"
-    });
-    con.connect();
-    var qury = `INSERT INTO sys.contactform (comment, email, submission_date, firstname ) VALUES ( "${comment}", "${email}", CURDATE(), "${firstname}" )`;
-    console.log(qury);
-    con.query(qury, 
-        function(err){
-            if(err) {
-                res.status(500)
-                res.render('error','FAILED TO ADD TO DATABASE, MYSQL ERROR')
-
-            }
-            //console.log(rows[0]);
-        }
+app.post('/contact', urlencodedParser, function(req, res){
     
-    );
-
-    con.end();
     upload(req, res, function(err) {
+        console.log(req);
         if (err) {
             return res.end("Something went wrong!");
+        } else {
+            var firstname=req.body.firstname;
+            var email=req.body.email;
+            var comment =req.body.comment;
+            console.log(req.body)
+            if(firstname==='' || email===''|| comment==='') {
+                res.status(400)
+                res.render('error','FAILED TO ADD TO DATABASE, missing valueERROR')
+
+            } else {
+
+                res.send("recieved your request!");
+            }
+
+
+            var con = mysql.createConnection({
+                host:"localhost",
+                user:"root",
+                password:"password",
+                database:"sys"
+            });
+            con.connect();
+            var qury = `INSERT INTO sys.contactform (comment, email, submission_date, firstname ) VALUES ( "${comment}", "${email}", CURDATE(), "${firstname}" )`;
+            console.log(qury);
+            con.query(qury, 
+                function(err){
+                    if(err) {
+                        res.status(500)
+                        res.render('error','FAILED TO ADD TO DATABASE, MYSQL ERROR')
+
+                    }
+                    //console.log(rows[0]);
+                }
+            
+            );
+
+        con.end();
+            return res.end("File uploaded sucessfully!.");
         }
-        return res.end("File uploaded sucessfully!.");
     });
+
+    
+
  });
  app.post('/family', urlencodedParser,function(req, res){
     var responseName= req.body.dropnames;
